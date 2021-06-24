@@ -14,24 +14,25 @@ namespace ArrayPractice
     {
         static Random rand = new Random();
 
-        int []vx = new int[3];
-        int []vy = new int[3];
+        const int labelmax = 10;
+        int []vx = new int[labelmax];
+        int []vy = new int[labelmax];
         int score = 100;
         int i;
-        Label[] labels = new Label[100];
+        Label[] labels = new Label[labelmax];
 
         public Form1()
         {
             InitializeComponent();
 
-            for(i = 0; i < 3; i++)
+            for(i = 0; i < labelmax; i++)
             {
                 vx[i] = rand.Next(-20, 21);
                 vy[i] = rand.Next(-20, 21);
 
                 labels[i] = new Label();
                 labels[i].AutoSize = true;
-                labels[i].Text = "(# ﾟДﾟ)";
+                labels[i].Text = "( ﾟДﾟ)ﾅﾝﾀﾞｯﾃ!?";
                 Controls.Add(labels[i]);
 
                 labels[i].Left = rand.Next(ClientSize.Width - labels[i].Width);
@@ -45,7 +46,7 @@ namespace ArrayPractice
             score--;
             scoreLabel.Text = $"Score {score:000}";
 
-            for (i = 0; i < 3; i++)
+            for (i = 0; i < labelmax; i++)
             {
                 labels[i].Left += vx[i];
                 labels[i].Top += vy[i];
@@ -70,7 +71,7 @@ namespace ArrayPractice
 
             Point fpos = PointToClient(MousePosition);
 
-            for(i = 0; i < 3; i++)
+            for(i = 0; i < labelmax; i++)
             {
                 if ((fpos.X >= labels[i].Left)
                 && (fpos.X < labels[i].Right)
@@ -80,12 +81,33 @@ namespace ArrayPractice
                     labels[i].Visible = false;
                 }
             }
-
-            if((labels[0].Visible == false)
+            if ((labels[0].Visible == false)
                 && (labels[1].Visible == false)
-                && (labels[2].Visible == false))
+                && (labels[2].Visible == false)
+                && (labels[4].Visible == false)
+                && (labels[5].Visible == false)
+                && (labels[6].Visible == false)
+                && (labels[7].Visible == false)
+                && (labels[8].Visible == false)
+                && (labels[9].Visible == false))
             {
-                timer1.Enabled = false;
+                    timer1.Enabled = false;
+            }
+        }
+
+        private void scoreLabel_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                if(i % 2 == 0)
+                {
+                    continue;
+                }
+                if (i == 9)
+                {
+                    break;
+                }
+                MessageBox.Show("" + i);
             }
         }
     }
