@@ -14,31 +14,16 @@ namespace ArrayPractice
     {
         static Random rand = new Random();
 
-        const int labelmax = 10;
-        int []vx = new int[labelmax];
-        int []vy = new int[labelmax];
+        int vx = rand.Next(-20, 21);
+        int vy = rand.Next(-20, 21);
         int score = 100;
-        int i;
-        Label[] labels = new Label[labelmax];
 
         public Form1()
         {
             InitializeComponent();
 
-            for(i = 0; i < labelmax; i++)
-            {
-                vx[i] = rand.Next(-20, 21);
-                vy[i] = rand.Next(-20, 21);
-
-                labels[i] = new Label();
-                labels[i].AutoSize = true;
-                labels[i].Text = "( ﾟДﾟ)ﾅﾝﾀﾞｯﾃ!?";
-                Controls.Add(labels[i]);
-
-                labels[i].Left = rand.Next(ClientSize.Width - labels[i].Width);
-                labels[i].Top = rand.Next(ClientSize.Height - labels[i].Height);
-            }
-
+            label1.Left = rand.Next(ClientSize.Width - label1.Width);
+            label1.Top = rand.Next(ClientSize.Height - label1.Height);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -46,68 +31,34 @@ namespace ArrayPractice
             score--;
             scoreLabel.Text = $"Score {score:000}";
 
-            for (i = 0; i < labelmax; i++)
-            {
-                labels[i].Left += vx[i];
-                labels[i].Top += vy[i];
+            label1.Left += vx;
+            label1.Top += vy;
 
-                if (labels[i].Left < 0)
-                {
-                    vx[i] = Math.Abs(vx[i]);
-                }
-                if (labels[i].Top < 0)
-                {
-                    vy[i] = Math.Abs(vy[i]);
-                }
-                if (labels[i].Right > ClientSize.Width)
-                {
-                    vx[i] = -Math.Abs(vx[i]);
-                }
-                if (labels[i].Bottom > ClientSize.Height)
-                {
-                    vy[i] = -Math.Abs(vy[i]);
-                }
+            if (label1.Left < 0)
+            {
+                vx = Math.Abs(vx);
+            }
+            if (label1.Top < 0)
+            {
+                vy = Math.Abs(vy);
+            }
+            if (label1.Right > ClientSize.Width)
+            {
+                vx = -Math.Abs(vx);
+            }
+            if (label1.Bottom > ClientSize.Height)
+            {
+                vy = -Math.Abs(vy);
             }
 
             Point fpos = PointToClient(MousePosition);
 
-            for(i = 0; i < labelmax; i++)
+            if ((fpos.X >= label1.Left)
+                && (fpos.X < label1.Right)
+                && (fpos.Y >= label1.Top)
+                && (fpos.Y < label1.Bottom))
             {
-                if ((fpos.X >= labels[i].Left)
-                && (fpos.X < labels[i].Right)
-                && (fpos.Y >= labels[i].Top)
-                && (fpos.Y < labels[i].Bottom))
-                {
-                    labels[i].Visible = false;
-                }
-            }
-            if ((labels[0].Visible == false)
-                && (labels[1].Visible == false)
-                && (labels[2].Visible == false)
-                && (labels[4].Visible == false)
-                && (labels[5].Visible == false)
-                && (labels[6].Visible == false)
-                && (labels[7].Visible == false)
-                && (labels[8].Visible == false)
-                && (labels[9].Visible == false))
-            {
-                    timer1.Enabled = false;
-            }
-        }
-
-        private void scoreLabel_Click(object sender, EventArgs e)
-        {
-            for(int i = 0; i < 10; i++)
-            {
-                if(i % 2 == 0)
-                {
-                    continue;
-                }
-                if (i == 9)
-                {
-                    break;
-                }
-                MessageBox.Show("" + i);
+                timer1.Enabled = false;
             }
         }
     }

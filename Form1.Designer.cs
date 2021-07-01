@@ -30,9 +30,21 @@ namespace ArrayPractice
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.scoreLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Yu Gothic UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(201, 124);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "(・ω・)";
             // 
             // timer1
             // 
@@ -50,7 +62,6 @@ namespace ArrayPractice
             this.scoreLabel.Size = new System.Drawing.Size(62, 21);
             this.scoreLabel.TabIndex = 1;
             this.scoreLabel.Text = "Score 0";
-            this.scoreLabel.Click += new System.EventHandler(this.scoreLabel_Click);
             // 
             // Form1
             // 
@@ -58,6 +69,7 @@ namespace ArrayPractice
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 281);
             this.Controls.Add(this.scoreLabel);
+            this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "ArrayPractice";
             this.ResumeLayout(false);
@@ -66,6 +78,8 @@ namespace ArrayPractice
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label scoreLabel;
     }
